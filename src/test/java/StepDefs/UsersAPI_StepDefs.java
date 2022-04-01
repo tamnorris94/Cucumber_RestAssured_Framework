@@ -30,6 +30,11 @@ public class UsersAPI_StepDefs {
         System.out.println("Print the response body" +response.body());
     }
 
+    @Given("Get request sent with invalid page number {int}")
+    public void get_request_sent_with_invalid_page_number(Integer invalidPageNumber) {
+        response = given().queryParam("page", invalidPageNumber).queryParam("id", "1").when().get();
+    }
+
     @Then("^The http response code will be (.*)$")
     public void validate_expected_httpResponseCode(int statusCode) {
         jsonResp = response.then().statusCode(statusCode);
@@ -47,5 +52,12 @@ public class UsersAPI_StepDefs {
         JsonPath j = new JsonPath(response.asString());
         String lastName = j.getString("data.last_name");
         Assert.assertEquals(lastName, expectedLastName);
+    }
+
+    @Then("^The support message will be (.*)$")
+    public void the_support_message_will_be_support_message(String expectedSupportMessage) {
+        JsonPath j = new JsonPath(response.asString());
+        String supportMessage = j.getString("support.text");
+        Assert.assertEquals(supportMessage, expectedSupportMessage);
     }
 }
