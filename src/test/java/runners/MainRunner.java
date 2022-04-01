@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(//features= {"classpath:FeatureFiles/CompareNumbers.feature"},
                  features = {"src/test/java/FeatureFiles"},
                  glue= {"StepDefs"},
-                 tags= "@allTests",
+                 tags= "@AllTests",
                  plugin = {"pretty","html:target/cucumber-report.html"
                  },
                  monochrome = false, dryRun = false)
